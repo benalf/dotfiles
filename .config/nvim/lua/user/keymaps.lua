@@ -46,6 +46,10 @@ keymap("i", "<C-s>", "<Esc>:w!<cr>", opts)
 keymap("n", "<C-q>", "<Esc>:q!<cr>", opts)
 keymap("i", "<C-q>", "<Esc>:q!<cr>", opts)
 
+
+keymap('n', '<leader>u', ":lua require('undotree').toggle()", opts)
+
+
 -- Insert --
 -- Press jk fast to exit insert mode 
 keymap("i", "jk", "<ESC>", opts)
@@ -73,4 +77,6 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 -- keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
 -- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 -- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
+
+keymap('i', '<C-i>', "->", opts)
 

@@ -112,10 +112,35 @@ cmp.setup {
     end,
   },
   sources = {
-    { name = "nvim_lsp" },
-    { name = "luasnip" },
-    { name = "buffer" },
-    { name = "path" },
+    {
+      name = "nvim_lsp",
+      priority = 100,
+      filter = function(entry, ctx)
+        local kind = require("cmp.types.lsp").CompletionItemKind[entry:get_kind()]
+        if kind == "Snippet" and ctx.prev_context.filetype == "java" then
+          return true
+        end
+
+        if kind == "Text" then
+          return true
+        end
+      end,
+      group_index = 2,
+    },
+    { name = "nvim_lua", group_index = 2 },
+    { name = "luasnip", group_index = 2 },
+    {
+      name = "buffer",
+      group_index = 2,
+      priority = 50,
+      filter = function(entry, ctx)
+        if not contains(buffer_fts, ctx.prev_context.filetype) then
+          return true
+        end
+      end,
+    },
+    { name = "path", group_index = 2 },
+    { name = "emoji", group_index = 2 },
   },
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,
@@ -127,6 +152,6 @@ cmp.setup {
     },
   },
   experimental = {
-    ghost_text = true,
+    ghost_text = false,
   },
 }

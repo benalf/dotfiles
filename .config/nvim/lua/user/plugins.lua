@@ -69,8 +69,16 @@ return packer.startup(function(use)
   use({ "hrsh7th/cmp-nvim-lsp" })
   use({ "hrsh7th/cmp-nvim-lua"})
 
+  use({ "sjl/gundo.vim" })
+
   use({ 'seblj/nvim-tabline', requires = { 'kyazdani42/nvim-web-devicons' } })
 
+  use({'neovim/nvim-lspconfig'})
+  use({'simrat39/rust-tools.nvim'})
+
+  -- Debugging
+  use({'nvim-lua/plenary.nvim'})
+  use({'mfussenegger/nvim-dap'})
 
   use({ "neovim/nvim-lspconfig"})
   use({ "williamboman/nvim-lsp-installer", config = function()

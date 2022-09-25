@@ -9,7 +9,7 @@ if not status_ok then
   return
 end
 
-local servers = { "jsonls", "sumneko_lua", "rust_analyzer", "taplo"  }
+local servers = { "jsonls", "sumneko_lua", "rust_analyzer", "taplo", "phpactor", "intelephense" }
 
 lsp_installer.setup({
   ensure_installed = servers,
@@ -17,16 +17,25 @@ lsp_installer.setup({
 
 navigator.setup({
   lsp_installer = true,
-  --[[ lsp_signature_help = true, ]]
-  treesitter_analysis = false,
-  treesitter_analysis_max_num = 10000,
-  treesitter_analysis_condense = false,
-  document_highlight = false,
-  preview_height = 0.7,
+  lsp_signature_help = true,
   lsp = {
+    diagnostic = {
+      update_in_insert = true,
+      underline = false,
+    },
+    diagnostic_update_in_insert = true,
+    disply_diagnostic_qf = false,
     format_on_save = false,
+    intelephense = {
+      flags = {
+      }
+    },
     phpactor = {
+      flags = {
+        allow_incremental_sync = false,
+      },
       init_options = {
+        ["language_server_phpstan.enabled"] = true,
         ["completion_worse.completor.doctrine_annotation.enabled"] = false,
         ["completion_worse.completor.imported_names.enabled"] = false,
         ["completion_worse.completor.worse_parameter.enabled"] = false,
