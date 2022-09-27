@@ -11,12 +11,8 @@ end
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
 nvim_tree.setup {
-  filesystem = {
-    filtered_items = {
-      visible = false,
-      hide_dotfiles = false,
-      hide_gitignored = true,
-    },
+  filters = {
+    dotfiles = false,
   },
   update_focused_file = {
     enable = true,
@@ -62,7 +58,6 @@ nvim_tree.setup {
   },
   view = {
     width = 30,
-    height = 30,
     side = "left",
     mappings = {
       list = {

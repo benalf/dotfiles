@@ -97,6 +97,8 @@ return packer.startup(function(use)
     run = ':TSUpdate'
   })
 
+  use ({ "catppuccin/nvim", as = "catppuccin" })
+
   -- Git
   use({ "lewis6991/gitsigns.nvim"})
 
