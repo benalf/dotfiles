@@ -2,4 +2,6 @@
 !.gitignore
 !.config
 !.config/nvim**
+.config/nvim/plugin
 !.config/tilix**
+
