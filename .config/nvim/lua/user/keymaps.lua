@@ -54,6 +54,7 @@ keymap('n', '<leader>u', ":lua require('undotree').toggle()", opts)
 -- Press jk fast to exit insert mode 
 keymap("i", "jk", "<ESC>", opts)
 keymap("i", "<C-L>", "_", opts)
+keymap("i", "<C-k>", "=", opts)
 
 -- Visual --
 -- Stay in indent mode
