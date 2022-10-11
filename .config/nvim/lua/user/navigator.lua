@@ -9,7 +9,17 @@ if not status_ok then
   return
 end
 
-local servers = { "jsonls", "sumneko_lua", "rust_analyzer", "taplo", "phpactor", "intelephense" }
+local servers = {
+  "jsonls",
+  "sumneko_lua",
+  "rust_analyzer",
+  "taplo",
+  "phpactor",
+  "intelephense",
+  "typescript",
+  "angularls",
+  "tsserver"
+}
 
 lsp_installer.setup({
   ensure_installed = servers,
@@ -19,6 +29,7 @@ navigator.setup({
   lsp_installer = true,
   lsp_signature_help = true,
   lsp = {
+    disable_lsp = { 'denols' },
     diagnostic = {
       update_in_insert = true,
       underline = false,
