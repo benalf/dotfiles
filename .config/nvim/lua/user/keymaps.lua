@@ -59,6 +59,7 @@ keymap("i", "<C-k>", "=", opts)
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
+keymap("v", "<C-r>", "\"hy:%s/<C-r>h//gc<left><left><left>", opts)
 
 -- Move text up and down
 keymap("v", "<A-j>", ":m .+1<CR>==", opts)
@@ -80,5 +81,5 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 -- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
 keymap('i', '<C-;>', "->", opts)
-keymap('i', '<C-'>', "=>", opts)
+keymap('i', '<C-\'>', "=>", opts)
 
