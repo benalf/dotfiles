@@ -72,6 +72,6 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 -- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 -- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
-keymap('i', '<C-;>', "->", opts)
-keymap('i', '<C-\'>', "=>", opts)
+keymap('i', '<C-i>', "->", opts)
+keymap('i', '<C-o>', "=>", opts)
 
