@@ -9,6 +9,127 @@ def start_once():
     home = os.path.expanduser('~')
     subprocess.call([home + '/.config/qtile/scripts/autostart.sh'])
 
+terminal = "tilix"
+colors = [["#282c34", "#282c34"],
+          ["#1c1f24", "#1c1f24"],
+          ["#dfdfdf", "#dfdfdf"],
+          ["#ff6c6b", "#ff6c6b"],
+          ["#98be65", "#98be65"],
+          ["#da8548", "#da8548"],
+          ["#51afef", "#51afef"],
+          ["#c678dd", "#c678dd"],
+          ["#46d9ff", "#46d9ff"],
+          ["#a9a1e1", "#a9a1e1"]]
+
+
+widget_defaults = dict(
+    font="VictorMono Nerd Font Mono Bold",
+    fontsize = 12,
+    padding = 2,
+    background = colors[0]
+)
+extension_defaults = widget_defaults.copy()
+
+
+def init_widgets_list():
+    widgets_list = [
+        widget.Sep(
+            linewidth = 0,
+            padding = 6,
+        ),
+        widget.Sep(
+            linewidth = 0,
+            padding = 6,
+        ),
+        widget.GroupBox(
+            fontsize = 9,
+            margin_y = 3,
+            margin_x = 0,
+            padding_y = 5,
+            padding_x = 3,
+            borderwidth = 3,
+            active = colors[2],
+            inactive = colors[7],
+            rounded = False,
+            highlight_color = colors[1],
+            highlight_method = "line",
+            this_current_screen_border = colors[6],
+            this_screen_border = colors [4],
+            other_current_screen_border = colors[6],
+            other_screen_border = colors[4],
+        ),
+        widget.TextBox(
+            text = '|',
+            foreground = '474747',
+        ),
+        widget.CurrentLayout(
+            foreground = colors[3],
+        ),
+        widget.TextBox(
+            text = '|',
+            foreground = '474747',
+        ),
+        widget.WindowName(
+            foreground = colors[6],
+            padding = 0
+        ),
+        widget.Systray(
+            background = colors[0],
+            padding = 5
+        ),
+        widget.TextBox(
+            text = '',
+            foreground = colors[6],
+            padding = 0,
+            fontsize = 37
+        ),
+        widget.Memory(
+            foreground = colors[1],
+            background = colors[6],
+            mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e htop')},
+            fmt = 'Mem: {} ',
+            padding = 5
+        ),
+        widget.TextBox(
+            text = '',
+            background = colors[6],
+            foreground = colors[4],
+            padding = 0,
+            fontsize = 37
+        ),
+        widget.Clock(
+            foreground = colors[1],
+            background = colors[4],
+            format = "%A, %B %d - %H:%M "
+        ),
+    ]
+    return widgets_list
+
+
+def init_widgets_screen1():
+    widgets_screen1 = init_widgets_list()
+    del widgets_screen1[7:8]
+
+    return widgets_screen1
+
+
+def init_widgets_screen2():
+    widgets_screen2 = init_widgets_list()
+
+    return widgets_screen2 
+
+
+def init_screens():
+    return [Screen(top=bar.Bar(margin=6, widgets=init_widgets_screen1(), opacity=1.0, size=24)),
+            Screen(top=bar.Bar(margin=6, widgets=init_widgets_screen2(), opacity=1.0, size=24))]
+
+if __name__ in ["config", "__main__"]:
+    screens = init_screens()
+    widgets_list = init_widgets_list()
+    widgets_screen1 = init_widgets_screen1()
+    widgets_screen2 = init_widgets_screen2()
+
+
 mod = "mod4"
 
 keys = [
@@ -47,7 +168,11 @@ keys = [
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+    Key(["shift", "mod1"], "f",  lazy.window.toggle_floating()),
     Key([mod], "r", lazy.run_extension(extension.DmenuRun(
+        fontsize=12,
+        # dmenu_height=10,
+        dmenu_lines=10
     ))),
 ]
 
@@ -76,60 +201,12 @@ for i in groups:
 layouts = [
     layout.Columns(
         border_on_single=True,
-        border_width=0,
+        border_width=1,
         border_normal="000000",
         border_focus="5900d1",
         margin=6,
     ),
     layout.Max(),
-]
-
-widget_defaults = dict(
-    font="sans",
-    fontsize=12,
-    padding=3,
-)
-extension_defaults = widget_defaults.copy()
-
-screens = [
-    Screen(
-        top=bar.Bar(
-            [
-                widget.GroupBox(),
-                widget.Prompt(),
-                widget.WindowName(),
-                widget.Chord(
-                    chords_colors={
-                        "launch": ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
-                ),
-                widget.PulseVolume(
-                    emoji=True,
-                ),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-            ],
-            24,
-        ),
-    ),
-    Screen(
-        top=bar.Bar(
-            [
-                widget.GroupBox(),
-                widget.Prompt(),
-                widget.WindowName(),
-                widget.Chord(
-                    chords_colors={
-                        "launch": ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
-                ),
-                widget.Systray(),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-            ],
-            24,
-        ),
-    ),
 ]
 
 mouse = [
@@ -138,7 +215,7 @@ mouse = [
     Click([mod], "Button2", lazy.window.bring_to_front()),
 ]
 
-dgroups_key_binder = None
+groups_key_binder = None
 dgroups_app_rules = []  # type: list
 follow_mouse_focus = True
 bring_front_click = False
