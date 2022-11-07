@@ -68,6 +68,7 @@ return packer.startup(function(use)
   use({ "saadparwaiz1/cmp_luasnip"})
   use({ "hrsh7th/cmp-nvim-lsp" })
   use({ "hrsh7th/cmp-nvim-lua"})
+  use({ "xiyaowong/nvim-transparent"})
 
   use({ "sjl/gundo.vim" })
 
@@ -100,6 +101,19 @@ return packer.startup(function(use)
 
   -- Git
   use({ "lewis6991/gitsigns.nvim"})
+
+require("transparent").setup({
+  enable = true,
+  extra_groups = {
+    "BufferLineTabClose",
+    "BufferlineBufferSelected",
+    "BufferLineFill",
+    "BufferLineBackground",
+    "BufferLineSeparator",
+    "BufferLineIndicatorSelected",
+  },
+  exclude = {}, -- table: groups you don't want to clear
+})
 
   if PACKER_BOOTSTRAP then
     require("packer").sync()

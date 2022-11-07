@@ -4,10 +4,12 @@ from libqtile import bar, layout, widget, hook, extension
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 
+
+home = os.path.expanduser('~')
 @hook.subscribe.startup_once
 def start_once():
-    home = os.path.expanduser('~')
     subprocess.call([home + '/.config/qtile/scripts/autostart.sh'])
+
 
 terminal = "tilix"
 colors = [["#282c34", "#282c34"],
@@ -142,6 +144,8 @@ keys = [
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
     Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
 
+    Key([mod], "Escape", lazy.spawn("dm-tool lock"), desc="Lock"),
+
     Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
     Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
@@ -153,6 +157,9 @@ keys = [
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
 
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+    Key([], "Print",
+        lazy.spawn("gnome-screenshot -i"),
+    ),
 
     Key(
         [mod, "shift"],
