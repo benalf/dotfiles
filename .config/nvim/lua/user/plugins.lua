@@ -91,7 +91,7 @@ return packer.startup(function(use)
 
   use({ 'ray-x/navigator.lua',    requires = { { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' }, { 'neovim/nvim-lspconfig' } } })
   use({ "ray-x/lsp_signature.nvim" })
-
+  use({ "johnfrankmorgan/whitespace.nvim" })
   use({
     "nvim-treesitter/nvim-treesitter",
     run = ':TSUpdate'
@@ -102,18 +102,6 @@ return packer.startup(function(use)
   -- Git
   use({ "lewis6991/gitsigns.nvim"})
 
-require("transparent").setup({
-  enable = true,
-  extra_groups = {
-    "BufferLineTabClose",
-    "BufferlineBufferSelected",
-    "BufferLineFill",
-    "BufferLineBackground",
-    "BufferLineSeparator",
-    "BufferLineIndicatorSelected",
-  },
-  exclude = {}, -- table: groups you don't want to clear
-})
 
   if PACKER_BOOTSTRAP then
     require("packer").sync()
