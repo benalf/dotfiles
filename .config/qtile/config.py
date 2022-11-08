@@ -176,11 +176,7 @@ keys = [
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key(["shift", "mod1"], "f",  lazy.window.toggle_floating()),
-    Key([mod], "r", lazy.run_extension(extension.DmenuRun(
-        fontsize=12,
-        # dmenu_height=10,
-        dmenu_lines=10
-    ))),
+    Key([mod], "r", lazy.spawn("dmenu_run -h 34 -bw 1 -h 10 -l 10")),
 ]
 
 groups = [Group(i) for i in "123456789"]
