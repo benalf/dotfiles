@@ -135,8 +135,7 @@ if __name__ in ["config", "__main__"]:
 mod = "mod4"
 
 keys = [
-    Key([mod, "control"], "1", lazy.to_screen(0)),
-    Key([mod, "control"], "2", lazy.to_screen(1)),
+    Key([mod], "m", lazy.next_screen()),
 
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
