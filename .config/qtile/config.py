@@ -179,38 +179,40 @@ keys = [
     Key([mod], "r", lazy.spawn("dmenu_run -h 34 -bw 1 -h 10 -l 10")),
 ]
 
-groups = [Group(i) for i in "123456789"]
 
-for i in groups:
-    keys.extend(
-        [
-            # mod1 + letter of group = switch to group
-            Key(
-                [mod],
-                i.name,
-                lazy.group[i.name].toscreen(),
-                desc="Switch to group {}".format(i.name),
-            ),
-            # mod1 + shift + letter of group = switch to & move focused window to group
-            Key(
-                [mod, "shift"],
-                i.name,
-                lazy.window.togroup(i.name, switch_group=True),
-                desc="Switch to & move focused window to group {}".format(i.name),
-            ),
-        ]
-    )
+layout_theme = {
+    "border_width": 2,
+    "margin": 6,
+    "border_focus": "e1acff",
+    "border_normal": "1D2330",
+    "border_on_single": True,
+}
 
 layouts = [
-    layout.Columns(
-        border_on_single=True,
-        border_width=1,
-        border_normal="000000",
-        border_focus="5900d1",
-        margin=6,
-    ),
-    layout.Max(),
+    layout.Columns(**layout_theme),
+    layout.Max(**layout_theme),
 ]
+
+groups = [
+    Group("1", layout='columns'),
+    Group(
+        "2",
+        layouts=[
+            layout.Columns(**{**layout_theme,** {
+                "num_columns": 3,
+            }}),
+        ],
+    ),
+    Group("3", layout='columns'),
+    Group("4", layout='columns'),
+    Group("5", layout='columns'),
+    Group("6", layout='columns'),
+    Group("7", layout='columns'),
+]
+from libqtile.dgroups import simple_key_binder
+dgroups_key_binder = simple_key_binder("mod4")
+
+
 
 mouse = [
     Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
@@ -237,7 +239,7 @@ floating_layout = layout.Floating(
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
-
+follow_mouse_focus = False
 auto_minimize = True
 
 wl_input_rules = None
