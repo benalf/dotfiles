@@ -10,9 +10,11 @@ home = os.path.expanduser('~')
 def start_once():
     subprocess.call([home + '/.config/qtile/scripts/autostart.sh'])
 
+terminal = "tilix"
+
 bar_color = "#00000070"
 border_color = "#1D2330"
-terminal = "tilix"
+focus_color = "#3041b5"
 colors = [["#00000080", "#00000080"],
           ["#1c1f24", "#1c1f24"],
           ["#dfdfdf", "#dfdfdf"],
@@ -81,7 +83,7 @@ def init_widgets_list():
             padding = 5
         ),
         widget.TextBox(
-            text = '',
+            text = ' ',
             foreground = colors[6],
             padding = 0,
             fontsize = 37
@@ -124,7 +126,7 @@ def init_widgets_screen2():
 
 def init_screens():
     return [Screen(top=bar.Bar(margin=4, widgets=init_widgets_screen1(), opacity=1.0, size=24, border_width=1, border_color=border_color, background="#00000000")),
-            Screen(top=bar.Bar(margin=4, widgets=init_widgets_screen2(), opacity=1.0, size=24, background="#00000000"))]
+            Screen(top=bar.Bar(margin=4, widgets=init_widgets_screen2(), opacity=1.0, size=24, border_width=1, border_color=border_color, background="#00000000"))]
 
 if __name__ in ["config", "__main__"]:
     screens = init_screens()
