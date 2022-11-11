@@ -10,9 +10,10 @@ home = os.path.expanduser('~')
 def start_once():
     subprocess.call([home + '/.config/qtile/scripts/autostart.sh'])
 
-
+bar_color = "#00000070"
+border_color = "#1D2330"
 terminal = "tilix"
-colors = [["#282c34", "#282c34"],
+colors = [["#00000080", "#00000080"],
           ["#1c1f24", "#1c1f24"],
           ["#dfdfdf", "#dfdfdf"],
           ["#ff6c6b", "#ff6c6b"],
@@ -28,7 +29,7 @@ widget_defaults = dict(
     font="VictorMono Nerd Font Mono Bold",
     fontsize = 12,
     padding = 2,
-    background = colors[0]
+    background = bar_color,
 )
 extension_defaults = widget_defaults.copy()
 
@@ -122,8 +123,8 @@ def init_widgets_screen2():
 
 
 def init_screens():
-    return [Screen(top=bar.Bar(margin=6, widgets=init_widgets_screen1(), opacity=1.0, size=24)),
-            Screen(top=bar.Bar(margin=6, widgets=init_widgets_screen2(), opacity=1.0, size=24))]
+    return [Screen(top=bar.Bar(margin=4, widgets=init_widgets_screen1(), opacity=1.0, size=24, border_width=1, border_color=border_color, background="#00000000")),
+            Screen(top=bar.Bar(margin=4, widgets=init_widgets_screen2(), opacity=1.0, size=24, background="#00000000"))]
 
 if __name__ in ["config", "__main__"]:
     screens = init_screens()
@@ -180,9 +181,9 @@ keys = [
 
 
 layout_theme = {
-    "border_width": 2,
+    "border_width": 1,
     "margin": 4,
-    "border_focus": "e1acff",
+    "border_focus": "3041b5",
     "border_normal": "1D2330",
     "border_on_single": True,
 }
@@ -200,7 +201,7 @@ groups = [
             layout.Columns(**{**layout_theme,** {
                 "num_columns": 3,
             }}),
-            layout.Max(**layout_theme),
+            layout.Max(**layout_theme)
         ],
     ),
     Group("3", layout='columns'),
