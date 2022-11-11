@@ -200,6 +200,7 @@ groups = [
             layout.Columns(**{**layout_theme,** {
                 "num_columns": 3,
             }}),
+            layout.Max(**layout_theme),
         ],
     ),
     Group("3", layout='columns'),
