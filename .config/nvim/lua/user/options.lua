@@ -33,8 +33,8 @@ local options = {
   scrolloff = 8,                           -- is one of my fav
   sidescrolloff = 8,
   guifont = "Iosevka:h10",               -- the font used in graphical neovim applications
-  signcolumn = "yes",
-  linespace = 3
+  linespace = 3,
+  shell = 'fish',
 }
 
 vim.opt.shortmess:append "c"
