@@ -6,4 +6,4 @@
 .config/qtile/__pycache__
 .config/nvim/plugin
 !.config/tilix**
-
+!.config/fish**

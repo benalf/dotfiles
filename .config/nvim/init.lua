@@ -19,7 +19,7 @@ require "user.hop"
 require "user.neovide"
 require "user.lsp_signature"
 require "user.navigator"
-require "user.catppuccin"
+--[[ require "user.catppuccin" ]]
 require "user.keymaps"
 require "user.whichkey"
 require "user.transparent"
