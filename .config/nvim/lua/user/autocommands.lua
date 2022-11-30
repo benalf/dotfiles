@@ -19,10 +19,16 @@ vim.cmd [[
     autocmd FileType markdown setlocal spell
   augroup end
 
-  augroup _markdown
+  augroup _php
     autocmd!
     autocmd FileType php setlocal shiftwidth=4
     autocmd FileType php setlocal tabstop=4
+  augroup end
+
+  augroup _typescript
+    autocmd!
+    autocmd FileType typescript setlocal shiftwidth=4
+    autocmd FileType typescript setlocal tabstop=4
   augroup end
 
   augroup _auto_resize
