@@ -10,6 +10,11 @@ keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+for _, mode in ipairs({[1] = "n", [2] = "v"}) do
+  keymap(mode, "<C-u>", "<C-u>zz", opts)
+  keymap(mode, "<C-d>", "<C-d>zz", opts)
+end
+
 -- Normal --
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h", opts)
