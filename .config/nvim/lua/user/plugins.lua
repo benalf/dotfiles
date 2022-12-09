@@ -71,8 +71,7 @@ return packer.startup(function(use)
   use({ "xiyaowong/nvim-transparent"})
 
   use({ "sjl/gundo.vim" })
-
-  use({ 'seblj/nvim-tabline', requires = { 'kyazdani42/nvim-web-devicons' } })
+  use({ "AndrewRadev/bufferize.vim" })
 
   use({'neovim/nvim-lspconfig'})
 

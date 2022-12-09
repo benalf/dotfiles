@@ -92,13 +92,17 @@ navigator.setup({
     format_on_save = false,
     intelephense = {
       flags = {
-      }
+      },
+      on_attach = function(client, bufnr)
+        client.server_capabilities.documentFormattingProvider = false;
+      end,
     },
     phpactor = {
       flags = {
         allow_incremental_sync = false,
       },
       init_options = {
+        ["language_server_php_cs_fixer.enabled"] = true,
         ["language_server_phpstan.enabled"] = true,
         ["completion_worse.completor.doctrine_annotation.enabled"] = false,
         ["completion_worse.completor.imported_names.enabled"] = false,

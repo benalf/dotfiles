@@ -4,7 +4,6 @@ require "user.colorscheme"
 require "user.cmp"
 require "user.telescope"
 require "user.treesitter"
---[[ require "user.autopairs" ]]
 require "user.comment"
 require "user.gitsigns"
 require "user.nvim-tree"
@@ -19,8 +18,8 @@ require "user.hop"
 require "user.neovide"
 require "user.lsp_signature"
 require "user.navigator"
---[[ require "user.catppuccin" ]]
 require "user.keymaps"
 require "user.whichkey"
 require "user.transparent"
 require "user.whitespace"
+
