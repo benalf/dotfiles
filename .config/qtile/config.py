@@ -16,12 +16,12 @@ bar_color = "#00000070"
 border_color = "#1D2330"
 focus_color = "#3041b5"
 colors = [["#00000080", "#00000080"],
-          ["#1c1f24", "#1c1f24"],
+          ["#050b40", "#050b40"],
           ["#dfdfdf", "#dfdfdf"],
           ["#ff6c6b", "#ff6c6b"],
-          ["#98be65", "#98be65"],
+          ["#050b40", "#050b40"],
           ["#da8548", "#da8548"],
-          ["#51afef", "#51afef"],
+          ["#2a0540", "#2a0540"],
           ["#c678dd", "#c678dd"],
           ["#46d9ff", "#46d9ff"],
           ["#a9a1e1", "#a9a1e1"]]
@@ -64,22 +64,20 @@ def init_widgets_list():
             other_screen_border = colors[4],
         ),
         widget.TextBox(
-            text = '|',
-            foreground = '474747',
+            text = ' ',
         ),
         widget.CurrentLayout(
             foreground = colors[3],
         ),
         widget.TextBox(
-            text = '|',
-            foreground = '474747',
+            text = ' ',
         ),
         widget.WindowName(
-            foreground = colors[6],
+            foreground = colors[7],
             padding = 0
         ),
         widget.Systray(
-            background = colors[0],
+            background = '#00000000',
             padding = 5
         ),
         widget.TextBox(
@@ -89,7 +87,7 @@ def init_widgets_list():
             fontsize = 37
         ),
         widget.Memory(
-            foreground = colors[1],
+            foreground = colors[7],
             background = colors[6],
             mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e htop')},
             fmt = 'Mem: {} ',
@@ -103,7 +101,7 @@ def init_widgets_list():
             fontsize = 37
         ),
         widget.Clock(
-            foreground = colors[1],
+            foreground = colors[3],
             background = colors[4],
             format = "%A, %B %d - %H:%M "
         ),
@@ -125,8 +123,8 @@ def init_widgets_screen2():
 
 
 def init_screens():
-    return [Screen(top=bar.Bar(margin=4, widgets=init_widgets_screen1(), opacity=1.0, size=24, border_width=1, border_color=border_color, background="#00000000")),
-            Screen(top=bar.Bar(margin=4, widgets=init_widgets_screen2(), opacity=1.0, size=24, border_width=1, border_color=border_color, background="#00000000"))]
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=1.0, size=24, background="#00000000")),
+            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=24, background="#00000000"))]
 
 if __name__ in ["config", "__main__"]:
     screens = init_screens()
@@ -178,14 +176,15 @@ keys = [
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key(["shift", "mod1"], "f",  lazy.window.toggle_floating()),
-    Key([mod], "r", lazy.spawn("dmenu_run -h 34 -bw 1 -h 10 -l 10")),
+    Key([mod], "r", lazy.spawn("rofi -show drun")),
+    Key([mod, "shift"], "r", lazy.spawn("rofi -show run")),
 ]
 
 
 layout_theme = {
     "border_width": 1,
     "margin": 4,
-    "border_focus": "3041b5",
+    "border_focus": colors[7],
     "border_normal": "1D2330",
     "border_on_single": True,
 }

@@ -7,3 +7,4 @@
 .config/nvim/plugin
 !.config/tilix**
 !.config/fish**
+!.config/rofi**
