@@ -76,8 +76,7 @@ def init_widgets_list():
             foreground = colors[7],
             padding = 0
         ),
-        widget.Systray(
-            background = '#00000000',
+        widget.StatusNotifier(
             padding = 5
         ),
         widget.TextBox(
@@ -111,7 +110,7 @@ def init_widgets_list():
 
 def init_widgets_screen1():
     widgets_screen1 = init_widgets_list()
-    del widgets_screen1[7:8]
+    del widgets_screen1[7:9]
 
     return widgets_screen1
 
