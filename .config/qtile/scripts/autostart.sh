@@ -5,5 +5,5 @@ nitrogen --restore &
 nm-applet &
 eval `ssh-agent -s`
 ssh-add
-ibus-daemon
+ibus-daemon &
 xset r rate 180 30
