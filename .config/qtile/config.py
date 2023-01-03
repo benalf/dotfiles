@@ -177,7 +177,7 @@ keys = [
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key(["shift", "mod1"], "f",  lazy.window.toggle_floating()),
     Key([mod], "r", lazy.spawn("rofi -show drun")),
-    Key([mod, "shift"], "r", lazy.spawn("rofi -show run")),
+    Key([mod, "shift"], "r", lazy.spawn("rofi -show combi")),
 ]
 
 
