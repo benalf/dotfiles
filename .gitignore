@@ -8,3 +8,4 @@
 !.config/tilix**
 !.config/fish**
 !.config/rofi**
+!.config/nemo**

@@ -156,9 +156,10 @@ keys = [
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
 
+    Key(["control", "mod1"], "l", lazy.spawn("lxdm -c USER_SWITCH")),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
     Key([], "Print",
-        lazy.spawn("gnome-screenshot -i"),
+        lazy.spawn("scrot -s --line mode=edge '/tmp/%F_%T_$wx$h.png' -e 'xclip -selection clipboard -target image/png -i $f'"),
     ),
 
     Key(
