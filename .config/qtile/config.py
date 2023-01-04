@@ -182,9 +182,9 @@ keys = [
 
 
 layout_theme = {
-    "border_width": 1,
+    "border_width": 2,
     "margin": 4,
-    "border_focus": colors[7],
+    "border_focus": "#5b009b",
     "border_normal": "1D2330",
     "border_on_single": True,
 }
