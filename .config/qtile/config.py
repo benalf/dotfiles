@@ -110,7 +110,7 @@ def init_widgets_list():
 
 def init_widgets_screen1():
     widgets_screen1 = init_widgets_list()
-    del widgets_screen1[7:9]
+    del widgets_screen1[7:8]
 
     return widgets_screen1
 
