@@ -76,7 +76,7 @@ def init_widgets_list():
             foreground = colors[7],
             padding = 0
         ),
-        widget.StatusNotifier(
+        widget.Systray(
             padding = 5
         ),
         widget.TextBox(

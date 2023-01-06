@@ -4,10 +4,6 @@ if not status_ok then
   return
 end
 
-local status_ok, lsp_installer = pcall(require, "nvim-lsp-installer")
-if not status_ok then
-  return
-end
 
 local servers = {
   "jsonls",
@@ -20,10 +16,6 @@ local servers = {
   "angularls",
   "tsserver"
 }
-
-lsp_installer.setup({
-  ensure_installed = servers,
-})
 
 navigator.setup({
   default_mapping = false,
@@ -79,7 +71,7 @@ navigator.setup({
     { key = '<Space>wl', func = require('navigator.workspace').list_workspace_folders, desc = 'list_workspace_folders' },
     { key = '<Space>la', mode = 'n', func = require('navigator.codelens').run_action, desc = 'run code lens action' },
   },
-  lsp_installer = true,
+  mason = true,
   lsp_signature_help = true,
   lsp = {
     disable_lsp = { 'denols' },
