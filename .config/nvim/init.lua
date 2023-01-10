@@ -1,5 +1,6 @@
 require "user.options"
 require "user.plugins"
+require "user.mason"
 require "user.colorscheme"
 require "user.cmp"
 require "user.telescope"

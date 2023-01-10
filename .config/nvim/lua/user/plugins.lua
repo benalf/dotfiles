@@ -42,6 +42,7 @@ return packer.startup(function(use)
   use({ "famiu/nvim-reload" })
 
   use({ "wbthomason/packer.nvim"}) -- Have packer manage itself
+  use { "williamboman/mason.nvim" }
   use({ "nvim-lua/plenary.nvim"}) -- Useful lua functions used by lots of plugins
   use({ "windwp/nvim-autopairs"}) -- Autopairs, integrates with both cmp and treesitter
   use({ "numToStr/Comment.nvim"})
@@ -80,10 +81,6 @@ return packer.startup(function(use)
   use({'mfussenegger/nvim-dap'})
 
   use({ "neovim/nvim-lspconfig"})
-  use({ "williamboman/nvim-lsp-installer", config = function()
-    local lsp_installer = require('nvim-lsp-installer')
-    lsp_installer.setup {}
-  end })
   use({ "jose-elias-alvarez/null-ls.nvim"})
 
   use({ "nvim-telescope/telescope.nvim"})
