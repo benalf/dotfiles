@@ -23,4 +23,6 @@ require "user.keymaps"
 require "user.whichkey"
 require "user.transparent"
 require "user.whitespace"
+require "user.swagger-preview"
+
 
