@@ -75,7 +75,10 @@ return packer.startup(function(use)
   use({ "AndrewRadev/bufferize.vim" })
 
   use({'neovim/nvim-lspconfig'})
-
+  use({
+      "vinnymeller/swagger-preview.nvim",
+      run = "npm install -g swagger-ui-watcher",
+  })
   -- Debugging
   use({'nvim-lua/plenary.nvim'})
   use({'mfussenegger/nvim-dap'})
