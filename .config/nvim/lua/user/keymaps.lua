@@ -46,11 +46,18 @@ keymap("i", "<C-q>", "<Esc>:q!<cr>", opts)
 
 keymap('n', '<leader>u', ":lua require('undotree').toggle()", opts)
 
-
 -- Insert --
 keymap("i", "jk", "<ESC>", opts)
 keymap("i", "<C-L>", "_", opts)
 keymap("i", "<C-k>", "=", opts)
+keymap("i", "<A-j>", "{", opts)
+keymap("i", "<A-k>", "}", opts)
+keymap("i", "<A-u>", "[", opts)
+keymap("i", "<A-i>", "]", opts)
+keymap("i", "<A-m>", "(", opts)
+keymap("i", "<A-,>", ")", opts)
+keymap("i", "<A-l>", "\"", opts)
+keymap("i", "<A-;>", "'", opts)
 
 -- Visual --
 -- Stay in indent mode
