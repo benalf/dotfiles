@@ -4,18 +4,8 @@ if not status_ok then
   return
 end
 
+local util = require 'lspconfig.util'
 
-local servers = {
-  "jsonls",
-  "sumneko_lua",
-  "rust_analyzer",
-  "taplo",
-  "phpactor",
-  "intelephense",
-  "typescript",
-  "angularls",
-  "tsserver"
-}
 
 navigator.setup({
   default_mapping = false,
@@ -80,8 +70,9 @@ navigator.setup({
       underline = false,
     },
     diagnostic_update_in_insert = true,
-    disply_diagnostic_qf = false,
     format_on_save = false,
+    disply_diagnostic_qf = false,
+    servers = {"gdscript"},
     intelephense = {
       flags = {
       },

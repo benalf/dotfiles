@@ -83,6 +83,8 @@ return packer.startup(function(use)
   use({'nvim-lua/plenary.nvim'})
   use({'mfussenegger/nvim-dap'})
 
+  use({'habamax/vim-godot'})
+
   use({ "neovim/nvim-lspconfig"})
   use({ "jose-elias-alvarez/null-ls.nvim"})
 
@@ -97,7 +99,7 @@ return packer.startup(function(use)
   })
 
   use ({ "catppuccin/nvim", as = "catppuccin" })
-
+  use ({ '/mustache/vim-mustache-handlebars' })
   -- Git
   use({ "lewis6991/gitsigns.nvim"})
 

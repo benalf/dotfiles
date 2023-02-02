@@ -9,3 +9,12 @@
 !.config/fish**
 !.config/rofi**
 !.config/nemo**
+!.config/hypr**
+!.config/spotifyd**
+!.config/wofi**
+!.config/rofi**
+!.config/waybar**
+!.config/neofetch**
+!.config/eww**
+!.config/lazygit**
+.config/lazygit/state.yml
