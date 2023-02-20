@@ -4,48 +4,42 @@ if not cmp_status_ok then
   return
 end
 
-local snip_status_ok, luasnip = pcall(require, "luasnip")
-if not snip_status_ok then
-  print("luasnip not installed")
-
+local luasnip_status_ok, luasnip = pcall(require, "luasnip")
+if not luasnip_status_ok then
+  print("cmp not installed")
   return
 end
-
-require("luasnip/loaders/from_vscode").lazy_load()
 
 local check_backspace = function()
   local col = vim.fn.col "." - 1
   return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
 end
 
---   פּ ﯟ   some other good icons
-local kind_icons = {
-  Text = "",
-  Method = "m",
-  Function = "",
-  Constructor = "",
-  Field = "",
-  Variable = "",
-  Class = "",
-  Interface = "",
-  Module = "",
-  Property = "",
-  Unit = "",
-  Value = "",
-  Enum = "",
-  Keyword = "",
-  Snippet = "",
-  Color = "",
-  File = "",
-  Reference = "",
-  Folder = "",
-  EnumMember = "",
-  Constant = "",
-  Struct = "",
-  Event = "",
-  Operator = "",
-  TypeParameter = "",
-}
+local lspkind_comparator = function(conf)
+  local lsp_types = require('cmp.types').lsp
+  return function(entry1, entry2)
+    if entry1.source.name ~= 'nvim_lsp' then
+      if entry2.source.name == 'nvim_lsp' then
+        return false
+      else
+        return nil
+      end
+    end
+    local kind1 = lsp_types.CompletionItemKind[entry1:get_kind()]
+    local kind2 = lsp_types.CompletionItemKind[entry2:get_kind()]
+
+    local priority1 = conf.kind_priority[kind1] or 0
+    local priority2 = conf.kind_priority[kind2] or 0
+    if priority1 == priority2 then
+      return nil
+    end
+    return priority2 < priority1
+  end
+end
+
+local label_comparator = function(entry1, entry2)
+  return entry1.completion_item.label < entry2.completion_item.label
+end
 
 cmp.setup {
   snippet = {
@@ -66,7 +60,10 @@ cmp.setup {
     },
     -- Accept currently selected item. If none selected, `select` first item.
     -- Set `select` to `false` to only confirm explicitly selected items.
-    ["<CR>"] = cmp.mapping.confirm { select = true },
+    ['<CR>'] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Insert,
+      select = true,
+    }),
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -97,50 +94,58 @@ cmp.setup {
     }),
   },
   formatting = {
-    fields = { "kind", "abbr", "menu" },
-    format = function(entry, vim_item)
-      -- Kind icons
-      vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-      -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-      vim_item.menu = ({
-        nvim_lsp = "[LSP]",
-        luasnip = "[Snippet]",
-        buffer = "[Buffer]",
-        path = "[Path]",
-      })[entry.source.name]
-      return vim_item
+      fields = {'menu', 'abbr', 'kind'},
+      format = function(entry, item)
+      local menu_icon ={
+            nvim_lsp = 'λ',
+            vsnip = '⋗',
+            buffer = 'Ω',
+            path = '/'
+        }
+      item.menu = menu_icon[entry.source.name]
+      return item
     end,
   },
+  sorting = {
+    comparators = {
+      lspkind_comparator({
+        kind_priority = {
+          Field = 11,
+          Property = 11,
+          Constant = 10,
+          Enum = 10,
+          EnumMember = 10,
+          Event = 10,
+          Function = 10,
+          Method = 10,
+          Operator = 10,
+          Reference = 10,
+          Struct = 10,
+          Variable = 9,
+          File = 8,
+          Folder = 8,
+          Class = 5,
+          Color = 5,
+          Module = 5,
+          Keyword = 2,
+          Constructor = 1,
+          Interface = 1,
+          Snippet = 0,
+          Text = 1,
+          TypeParameter = 1,
+          Unit = 1,
+          Value = 1,
+        },
+      }),
+      label_comparator,
+    },
+  },
   sources = {
-    {
-      name = "nvim_lsp",
-      priority = 100,
-      filter = function(entry, ctx)
-        local kind = require("cmp.types.lsp").CompletionItemKind[entry:get_kind()]
-        if kind == "Snippet" and ctx.prev_context.filetype == "java" then
-          return true
-        end
-
-        if kind == "Text" then
-          return true
-        end
-      end,
-      group_index = 2,
-    },
-    { name = "nvim_lua", group_index = 2 },
-    { name = "luasnip", group_index = 2 },
-    {
-      name = "buffer",
-      group_index = 2,
-      priority = 50,
-      filter = function(entry, ctx)
-        if not contains(buffer_fts, ctx.prev_context.filetype) then
-          return true
-        end
-      end,
-    },
-    { name = "path", group_index = 2 },
-    { name = "emoji", group_index = 2 },
+    { name = 'path' },                              -- file paths
+    { name = 'nvim_lsp', keyword_length = 1 },      -- from language server
+    { name = 'nvim_lua', keyword_length = 1},       -- complete neovim's Lua runtime API such vim.lsp.*
+    { name = 'buffer', keyword_length = 3 },        -- source current buffer
+    { name = 'luasnip', keyword_length = 1 },         -- nvim-cmp source for vim-vsnip
   },
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,

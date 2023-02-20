@@ -37,10 +37,8 @@ packer.init({
 })
 
 return packer.startup(function(use)
-
   use({ "phaazon/hop.nvim", branch = 'v2' })
   use({ "famiu/nvim-reload" })
-
   use({ "wbthomason/packer.nvim"}) -- Have packer manage itself
   use { "williamboman/mason.nvim" }
   use({ "nvim-lua/plenary.nvim"}) -- Useful lua functions used by lots of plugins
@@ -62,36 +60,32 @@ return packer.startup(function(use)
   use("lunarvim/darkplus.nvim")
   use({ "wadackel/vim-dogrun" })
 
-  use({ "sar/luasnip.nvim" })
   use({ "hrsh7th/nvim-cmp"})
   use({ "hrsh7th/cmp-buffer" })
   use({ "hrsh7th/cmp-path"})
-  use({ "saadparwaiz1/cmp_luasnip"})
   use({ "hrsh7th/cmp-nvim-lsp" })
+  use({ "ray-x/lsp_signature.nvim" })
+  --[[ use({ 'hrsh7th/cmp-nvim-lsp-signature-help' }) ]]
   use({ "hrsh7th/cmp-nvim-lua"})
-  use({ "xiyaowong/nvim-transparent"})
 
+  use({"L3MON4D3/LuaSnip"})
+  use({"saadparwaiz1/cmp_luasnip"})
+
+  use({ "xiyaowong/nvim-transparent"})
   use({ "sjl/gundo.vim" })
   use({ "AndrewRadev/bufferize.vim" })
-
   use({'neovim/nvim-lspconfig'})
   use({
       "vinnymeller/swagger-preview.nvim",
       run = "npm install -g swagger-ui-watcher",
   })
-  -- Debugging
   use({'nvim-lua/plenary.nvim'})
   use({'mfussenegger/nvim-dap'})
-
   use({'habamax/vim-godot'})
-
   use({ "neovim/nvim-lspconfig"})
   use({ "jose-elias-alvarez/null-ls.nvim"})
-
   use({ "nvim-telescope/telescope.nvim"})
-
   use({ 'ray-x/navigator.lua',    requires = { { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' }, { 'neovim/nvim-lspconfig' } } })
-  use({ "ray-x/lsp_signature.nvim" })
   use({ "johnfrankmorgan/whitespace.nvim" })
   use({
     "nvim-treesitter/nvim-treesitter",
@@ -99,10 +93,11 @@ return packer.startup(function(use)
   })
 
   use ({ "catppuccin/nvim", as = "catppuccin" })
-  use ({ '/mustache/vim-mustache-handlebars' })
-  -- Git
+  use ({ "mustache/vim-mustache-handlebars" })
   use({ "lewis6991/gitsigns.nvim"})
-
+  use 'simrat39/rust-tools.nvim'
+  use 'j-hui/fidget.nvim'
+  use ({ "onsails/lspkind.nvim" })
 
   if PACKER_BOOTSTRAP then
     require("packer").sync()

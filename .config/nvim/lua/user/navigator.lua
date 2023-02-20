@@ -64,7 +64,7 @@ navigator.setup({
   mason = true,
   lsp_signature_help = true,
   lsp = {
-    disable_lsp = { 'denols' },
+    disable_lsp = { 'denols', 'rust_analyzer' },
     diagnostic = {
       update_in_insert = true,
       underline = false,
@@ -73,6 +73,13 @@ navigator.setup({
     format_on_save = false,
     disply_diagnostic_qf = false,
     servers = {"gdscript"},
+    intelephense = {
+      flags = {
+      },
+      on_attach = function(client, bufnr)
+        client.server_capabilities.documentFormattingProvider = false;
+      end,
+    },
     intelephense = {
       flags = {
       },
