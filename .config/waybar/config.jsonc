@@ -72,7 +72,7 @@
     },
     "tray": {
         "icon-size": 13,
-        "tooltip": false,
+        "tooltip": true,
         "spacing": 10
     },
     "clock": {

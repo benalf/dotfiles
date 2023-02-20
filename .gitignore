@@ -17,4 +17,5 @@
 !.config/neofetch**
 !.config/eww**
 !.config/lazygit**
+!.config/networkmanager-dmenu**
 .config/lazygit/state.yml
