@@ -18,4 +18,6 @@
 !.config/eww**
 !.config/lazygit**
 !.config/networkmanager-dmenu**
+!.config/k9s**
+.config/k9s/config.yml
 .config/lazygit/state.yml
