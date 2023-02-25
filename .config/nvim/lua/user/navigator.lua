@@ -80,13 +80,6 @@ navigator.setup({
         client.server_capabilities.documentFormattingProvider = false;
       end,
     },
-    intelephense = {
-      flags = {
-      },
-      on_attach = function(client, bufnr)
-        client.server_capabilities.documentFormattingProvider = false;
-      end,
-    },
     phpactor = {
       flags = {
         allow_incremental_sync = false,

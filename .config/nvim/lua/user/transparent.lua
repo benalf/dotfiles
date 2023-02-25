@@ -12,6 +12,8 @@ transparent.setup({
     "BufferLineBackground",
     "BufferLineSeparator",
     "BufferLineIndicatorSelected",
+    "TelescopeNormal",
+    "NvimTreeNormal",
   },
   exclude = {}, -- table: groups you don't want to clear
 })

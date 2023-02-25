@@ -4,11 +4,10 @@
     "mod": "dock",
     "exclusive": true,
     "passtrough": false,
-    "gtk-layer-shell": false,
+    "gtk-layer-shell": true,
     "height": 0,
     "modules-left": [
         "clock",
-        "custom/weather",
         "wlr/workspaces"
     ],
     "modules-center": ["hyprland/window"],
@@ -17,7 +16,11 @@
         // "custom/language",
         "tray",
         "pulseaudio",
-        "pulseaudio#microphone"
+        "pulseaudio#microphone",
+        "network",
+        "bluetooth",
+        "backlight",
+        "battery"
     ],
 
     "hyprland/window": {
@@ -63,16 +66,8 @@
     //     "format": " {}",
     //     "tooltip": false
     // },
-    "custom/weather" : {
-        "tooltip" : true,
-        "format" : "{}",
-        "restart-interval" : 300,
-        "exec" : "~/.config/waybar/scripts/waybar-wttr.py",
-        "return-type" : "json"
-    },
     "tray": {
         "icon-size": 13,
-        "tooltip": true,
         "spacing": 10
     },
     "clock": {
