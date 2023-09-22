@@ -19,3 +19,6 @@ mason.setup({
   --[[   }) ]]
   --[[ end ]]
 })
+
+
+require("lspconfig").ocamllsp.setup {}

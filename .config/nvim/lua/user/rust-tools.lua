@@ -10,6 +10,27 @@ rt.setup({
       require("navigator.dochighlight").documentHighlight(bufnr)
       require('navigator.codeAction').code_action_prompt(bufnr)
     end,
+    settings = {
+        ["rust-analyzer"] = {
+            diagnostics = {
+              disabled = {"unresolved-proc-macro"}
+            },
+            imports = {
+                granularity = {
+                    group = "module",
+                },
+                prefix = "self",
+            },
+            cargo = {
+                buildScripts = {
+                    enable = true,
+                },
+            },
+            procMacro = {
+                enable = true
+            },
+        }
+    }
   }
 })
 

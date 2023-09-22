@@ -57,6 +57,8 @@ return packer.startup(function(use)
   use("folke/which-key.nvim")
 
   use({ "folke/tokyonight.nvim"})
+
+  use 'Mofiqul/dracula.nvim'
   use("lunarvim/darkplus.nvim")
   use({ "wadackel/vim-dogrun" })
 
@@ -74,30 +76,71 @@ return packer.startup(function(use)
   use({ "xiyaowong/nvim-transparent"})
   use({ "sjl/gundo.vim" })
   use({ "AndrewRadev/bufferize.vim" })
-  use({'neovim/nvim-lspconfig'})
   use({
       "vinnymeller/swagger-preview.nvim",
       run = "npm install -g swagger-ui-watcher",
   })
+
+  use ({'stephpy/vim-php-cs-fixer'})
+  use ({'ray-x/go.nvim'})
   use({'nvim-lua/plenary.nvim'})
   use({'mfussenegger/nvim-dap'})
   use({'habamax/vim-godot'})
   use({ "neovim/nvim-lspconfig"})
   use({ "jose-elias-alvarez/null-ls.nvim"})
+  use({ "MunifTanjim/eslint.nvim"})
   use({ "nvim-telescope/telescope.nvim"})
   use({ 'ray-x/navigator.lua',    requires = { { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' }, { 'neovim/nvim-lspconfig' } } })
+  --[[ use({ 'tjdevries/ocaml.nvim', run = ':lua require("ocaml").update()' }) ]]
   use({ "johnfrankmorgan/whitespace.nvim" })
   use({
     "nvim-treesitter/nvim-treesitter",
     run = ':TSUpdate'
   })
 
+  use({'scalameta/nvim-metals', requires = { "nvim-lua/plenary.nvim" }})
+
   use ({ "catppuccin/nvim", as = "catppuccin" })
   use ({ "mustache/vim-mustache-handlebars" })
   use({ "lewis6991/gitsigns.nvim"})
   use 'simrat39/rust-tools.nvim'
-  use 'j-hui/fidget.nvim'
+  use {
+    'j-hui/fidget.nvim',
+    tag = 'legacy',
+    config = function()
+      require("fidget").setup {
+        fmt = {
+          fidget =
+              function(fidget_name, spinner)
+                if fidget_name == "phpactor" then
+                  return ""
+                end
+
+                return string.format("%s %s", spinner, fidget_name)
+              end,
+          task = function(task_name, message, percentage)
+              if task_name == "code_action" or task_name == "Resolving code actions" then
+                  return false
+              end
+              return string.format(
+                  "%s%s [%s]",
+                  message,
+                  percentage and string.format(" (%s%%)", percentage) or "",
+                  task_name
+              )
+          end,
+        }
+      }
+    end,
+  }
   use ({ "onsails/lspkind.nvim" })
+  use({
+    "epwalsh/obsidian.nvim",
+    requires = {
+      -- Required.
+      "nvim-lua/plenary.nvim",
+    },
+  })
 
   if PACKER_BOOTSTRAP then
     require("packer").sync()

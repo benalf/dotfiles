@@ -44,3 +44,6 @@ for k, v in pairs(options) do
 end
 
 vim.cmd "set whichwrap+=<,>,[,],h,l"
+
+vim.g.php_cs_fixer_path = "~/.config/composer/vendor/bin/php-cs-fixer";
+

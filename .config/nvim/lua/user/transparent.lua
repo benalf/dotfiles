@@ -4,8 +4,15 @@ if not status_ok then
 end
 
 transparent.setup({
-  enable = true,
-  extra_groups = {
+  groups = { -- table: default
+    'Normal', 'NormalNC', 'Comment', 'Constant', 'Special', 'Identifier',
+    'Statement', 'PreProc', 'Type', 'Underlined', 'Todo', 'String', 'Function',
+    'Conditional', 'Repeat', 'Operator', 'Structure', 'LineNr', 'NonText',
+    'SignColumn', 'CursorLineNr', 'EndOfBuffer',
+    'Normal', 'NormalNC', 'Comment', 'Constant', 'Special', 'Identifier',
+    'Statement', 'PreProc', 'Type', 'Underlined', 'Todo', 'String', 'Function',
+    'Conditional', 'Repeat', 'Operator', 'Structure', 'LineNr', 'NonText',
+    'SignColumn', 'CursorLineNr', 'EndOfBuffer',
     "BufferLineTabClose",
     "BufferlineBufferSelected",
     "BufferLineFill",
@@ -15,5 +22,5 @@ transparent.setup({
     "TelescopeNormal",
     "NvimTreeNormal",
   },
-  exclude = {}, -- table: groups you don't want to clear
+  exclude_groups = {}, -- table: groups you don't want to clear
 })

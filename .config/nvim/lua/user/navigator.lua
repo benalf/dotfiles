@@ -21,11 +21,11 @@ navigator.setup({
     { key = '<Leader>gT', func = require('navigator.treesitter').bufs_ts, desc = 'bufs_ts' },
     { key = '<Leader>ct', func = require('navigator.ctags').ctags, desc = 'ctags' },
     { key = 'K', func = vim.lsp.buf.hover, desc = 'hover' },
-    { key = '<Space>ca', mode = 'n', func = require('navigator.codeAction').code_action, desc = 'code_action' },
+    { key = '<M-CR>', mode = 'n', func = require('navigator.codeAction').code_action, desc = 'code_action' },
     {
-      key = '<Space>ca',
-      mode = 'v',
-      func = require('navigator.codeAction').range_code_action,
+      key = '<M-CR>',
+      mode = 'n',
+      func = require('navigator.codeAction').code_action,
       desc = 'range_code_action',
     },
     { key = '<Space>rn', func = require('navigator.rename').rename, desc = 'rename' },
@@ -66,26 +66,39 @@ navigator.setup({
   lsp = {
     disable_lsp = { 'denols', 'rust_analyzer' },
     diagnostic = {
-      update_in_insert = true,
       underline = false,
     },
-    diagnostic_update_in_insert = true,
+    code_action = {enable = true, sign = true, sign_priority = 40, virtual_text = true},
     format_on_save = false,
-    disply_diagnostic_qf = false,
-    servers = {"gdscript"},
+    disply_diagnostic_qf = false, -- older versions had a typo
+    display_diagnostic_qf = false,
+    servers = {"gdscript", "metals"},
     intelephense = {
+      settings = {
+        intelephense = {
+          files = { maxSize = 100000000 }
+        }
+      },
       flags = {
       },
       on_attach = function(client, bufnr)
         client.server_capabilities.documentFormattingProvider = false;
       end,
     },
+    metals = {
+      filetypes = {"scala", "java"},
+      on_attach = function(client)
+        print("aa")
+        client.resolved_capabilities.document_formatting = true
+      end
+    },
     phpactor = {
       flags = {
-        allow_incremental_sync = false,
+        on_attach = function(client, bufnr)
+          client.server_capabilities.documentFormattingProvider = false;
+        end,
       },
       init_options = {
-        ["language_server_php_cs_fixer.enabled"] = true,
         ["language_server_phpstan.enabled"] = true,
         ["completion_worse.completor.doctrine_annotation.enabled"] = false,
         ["completion_worse.completor.imported_names.enabled"] = false,
@@ -109,3 +122,5 @@ navigator.setup({
     }
   }
 })
+
+
