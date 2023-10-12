@@ -57,8 +57,6 @@ return packer.startup(function(use)
   use("folke/which-key.nvim")
 
   use({ "folke/tokyonight.nvim"})
-
-  use 'Mofiqul/dracula.nvim'
   use("lunarvim/darkplus.nvim")
   use({ "wadackel/vim-dogrun" })
 
@@ -85,13 +83,12 @@ return packer.startup(function(use)
   use ({'ray-x/go.nvim'})
   use({'nvim-lua/plenary.nvim'})
   use({'mfussenegger/nvim-dap'})
-  use({'habamax/vim-godot'})
+  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
   use({ "neovim/nvim-lspconfig"})
   use({ "jose-elias-alvarez/null-ls.nvim"})
   use({ "MunifTanjim/eslint.nvim"})
   use({ "nvim-telescope/telescope.nvim"})
   use({ 'ray-x/navigator.lua',    requires = { { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' }, { 'neovim/nvim-lspconfig' } } })
-  --[[ use({ 'tjdevries/ocaml.nvim', run = ':lua require("ocaml").update()' }) ]]
   use({ "johnfrankmorgan/whitespace.nvim" })
   use({
     "nvim-treesitter/nvim-treesitter",
@@ -133,6 +130,7 @@ return packer.startup(function(use)
       }
     end,
   }
+
   use ({ "onsails/lspkind.nvim" })
   use({
     "epwalsh/obsidian.nvim",
@@ -141,7 +139,10 @@ return packer.startup(function(use)
       "nvim-lua/plenary.nvim",
     },
   })
-
+  use{ "chentoast/marks.nvim" }
+  use ({ "tpope/vim-dadbod" })
+  use ({ "kristijanhusak/vim-dadbod-ui" })
+  use ({ "kristijanhusak/vim-dadbod-completion" })
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end

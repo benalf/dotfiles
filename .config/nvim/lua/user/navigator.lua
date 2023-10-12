@@ -63,6 +63,7 @@ navigator.setup({
   },
   mason = true,
   lsp_signature_help = true,
+  ts_fold = false,
   lsp = {
     disable_lsp = { 'denols', 'rust_analyzer' },
     diagnostic = {
@@ -72,7 +73,7 @@ navigator.setup({
     format_on_save = false,
     disply_diagnostic_qf = false, -- older versions had a typo
     display_diagnostic_qf = false,
-    servers = {"gdscript", "metals"},
+    servers = {"metals"},
     intelephense = {
       settings = {
         intelephense = {
@@ -88,8 +89,8 @@ navigator.setup({
     metals = {
       filetypes = {"scala", "java"},
       on_attach = function(client)
-        print("aa")
         client.resolved_capabilities.document_formatting = true
+        on_attach(client)
       end
     },
     phpactor = {

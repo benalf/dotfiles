@@ -80,12 +80,19 @@ local opts = {
 
 local mappings = {
   ["a"] = { "<cmd>Alpha<cr>", "Alpha" },
+  ["d"] = {
+    "<cmd>lua require('telescope.builtin').diagnostics()<cr>",
+    "Marks",
+  },
+  ["m"] = {
+    "<cmd>lua require('telescope.builtin').marks()<cr>",
+    "Marks",
+  },
   ["b"] = {
     "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
     "Buffers",
   },
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
-  ["w"] = { "<cmd>w!<CR>", "Save" },
   ["q"] = { "<cmd>q!<CR>", "Quit" },
   ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
   ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
@@ -95,6 +102,19 @@ local mappings = {
   },
   ["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
   ["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
+
+  u = {
+    name = "Util",
+    i = { "<cmd>Bufferize messages<cr>", "Messages" },
+  },
+
+  r = {
+    name = "Dap",
+    g = { "<cmd>DapContinue<cr>", "Continue" },
+    b = { "<cmd>DapToggleBreakpoint<cr>", "Toggle Breakpoint" },
+    u = { "<cmd>DapUiToggle<cr>", "UI Toggle" },
+    t = { "<cmd>DapTerminate<cr>", "Terminate" },
+  },
 
   p = {
     name = "Packer",
@@ -139,7 +159,7 @@ local mappings = {
       "<cmd>Telescope lsp_workspace_diagnostics<cr>",
       "Workspace Diagnostics",
     },
-    f = { "<cmd>lua vim.lsp.buf.format{async=true}<cr>", "Format" },
+    f = { "<cmd>call PhpCsFixerFixFile<cr>", "Format" },
     i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>Mason<cr>", "Installer Info" },
     j = {
