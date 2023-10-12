@@ -9,6 +9,9 @@ export EDITOR=nvim
 export MANPAGER='nvim +Man!'
 export KITTY_ENABLE_WAYLAND=1
 
+alias vim=nvim
+alias mysql=mariadb
+
 # opam configuration
 source /home/alf/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
 
