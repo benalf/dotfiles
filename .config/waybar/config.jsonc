@@ -7,12 +7,12 @@
     "gtk-layer-shell": true,
     "height": 0,
     "modules-left": [
-        "clock",
-        "wlr/workspaces"
+        "hyprland/workspaces"
     ],
     "modules-center": ["hyprland/window"],
     "modules-right": [
         // "custom/updates",
+        // "custom/language",
         // "custom/language",
         "tray",
         "pulseaudio",
@@ -20,26 +20,27 @@
         "network",
         "bluetooth",
         "backlight",
-        "battery"
+        "battery",
+        "custom/pomo",
+        "clock"
     ],
 
     "hyprland/window": {
         "format": "{}"
     },
-    "wlr/workspaces": {
+    "hyprland/workspaces": {
         "on-scroll-up": "hyprctl dispatch workspace e+1",
         "on-scroll-down": "hyprctl dispatch workspace e-1",
         "all-outputs": true,
         "on-click": "activate",
         "format": "{icon}",
         "format-icons": {
-            "1": "",
-            "2": "",
-            "3": "",
-            "4": "",
-            "5": "",
+            "1": " web",
+            "2": " cli",
+            "3": " com",
+            "4": " dsc",
+            "5": " aud",
             "urgent": "",
-            "active": "",
             "default": ""
           }
     },
@@ -66,6 +67,12 @@
     //     "format": " {}",
     //     "tooltip": false
     // },
+    "custom/pomo": {
+        "exec": "pomo status",
+        "interval": 1,
+        "format": "⌕ {}",
+        "tooltip": false
+    },
     "tray": {
         "icon-size": 13,
         "spacing": 10
