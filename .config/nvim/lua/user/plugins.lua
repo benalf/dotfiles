@@ -143,6 +143,13 @@ return packer.startup(function(use)
   use ({ "tpope/vim-dadbod" })
   use ({ "kristijanhusak/vim-dadbod-ui" })
   use ({ "kristijanhusak/vim-dadbod-completion" })
+  use ({ "David-Kunz/gen.nvim" })
+  use ({ "kristijanhusak/vim-dadbod-completion" })
+  use {'nvim-telescope/telescope-ui-select.nvim' }
+  use({
+    "LhKipp/nvim-nu",
+    run = ':TSInstall nu'
+  })
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end

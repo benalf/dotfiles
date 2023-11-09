@@ -1,0 +1,7 @@
+keymap:
+  - name: Return all the things
+    remap:
+      C-m: enter
+  - name: Logi has too much love for Windows
+    remap:
+      VolumeUp: Print
