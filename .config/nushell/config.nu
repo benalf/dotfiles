@@ -156,9 +156,6 @@ $env.config = {
         always_trash: false # always act as if -t was given. Can be overridden with -p
     }
 
-    cd: {
-    }
-
     table: {
         mode: rounded # basic, compact, compact_double, light, thin, with_love, rounded, reinforced, heavy, none, other
         index_mode: always # "always" show indexes, "never" show indexes, "auto" = show indexes when a table has "index" column
@@ -806,7 +803,7 @@ source ~/.config/nushell/ohp.nu
 
 $env.PATH = ($env.PATH | split row (char esep) | append $"($env.HOME)/.cargo/bin")
 
-def-env ya [] {
+def --env ya [] {
     let tmp = (mktemp -t "yazi-cwd.XXXXX")
     yazi --cwd-file $tmp
     let cwd = (cat -- $tmp)
