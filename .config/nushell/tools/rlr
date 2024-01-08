@@ -1,0 +1,17 @@
+#!/usr/bin/env nu
+
+def main [filename: string] {
+  touch $filename;
+  let exec_cmd = match ($filename | split row ".") {
+    [_, $ext] => (match $ext {
+      "js" | "mjs" => $"node ($filename)",
+      "ts" => $"bun ($filename)",
+      "nu" => $"nu ($filename)",
+      "go" => $"go run ($filename)",
+      "php" => $"php ($filename)",
+    })
+  };
+
+  run-external "nvim" $"($filename)" "-c" ":sp" "-c" $":terminal ^ls ($filename) | entr -r ($exec_cmd)" "-c" ":norm G" "-c" ":wincmd w"
+}
+
