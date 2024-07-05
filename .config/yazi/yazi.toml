@@ -30,6 +30,9 @@ reveal = [
 	{ exec = 'explorer /select,%1', orphan = true, desc = "Reveal", for = "windows" },
 	{ exec = '''exiftool "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show EXIF", for = "unix" },
 ]
+browser = [
+	{ exec = 'mupdf -I "$1"', block = true, desc = "Show EXIF", for = "unix" },
+]
 extract = [
 	{ exec = 'unar "$1"', desc = "Extract here", for = "unix" },
 	{ exec = 'unar "%1"', desc = "Extract here", for = "windows" },
@@ -44,6 +47,7 @@ play = [
 rules = [
 	{ name = "*/", use = [ "edit", "open", "reveal" ] },
 
+	{ mime = "application/pdf", use = [ "browser", "text" ] },
 	{ mime = "text/*",  use = [ "edit", "reveal" ] },
 	{ mime = "image/*", use = [ "open", "reveal" ] },
 	{ mime = "video/*", use = [ "play", "reveal" ] },
