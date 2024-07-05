@@ -41,6 +41,7 @@ return packer.startup(function(use)
   use({ "famiu/nvim-reload" })
   use({ "wbthomason/packer.nvim"}) -- Have packer manage itself
   use { "williamboman/mason.nvim" }
+  use { "williamboman/mason-lspconfig.nvim" }
   use({ "nvim-lua/plenary.nvim"}) -- Useful lua functions used by lots of plugins
   use({ "windwp/nvim-autopairs"}) -- Autopairs, integrates with both cmp and treesitter
   use({ "numToStr/Comment.nvim"})
@@ -83,7 +84,7 @@ return packer.startup(function(use)
   use ({'ray-x/go.nvim'})
   use({'nvim-lua/plenary.nvim'})
   use({'mfussenegger/nvim-dap'})
-  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} }
   use({ "neovim/nvim-lspconfig"})
   use({ "jose-elias-alvarez/null-ls.nvim"})
   use({ "MunifTanjim/eslint.nvim"})
@@ -146,11 +147,29 @@ return packer.startup(function(use)
   use ({ "David-Kunz/gen.nvim" })
   use ({ "kristijanhusak/vim-dadbod-completion" })
   use {'nvim-telescope/telescope-ui-select.nvim' }
+
+  --[[ use { ]]
+  --[[   'harrisoncramer/gitlab.nvim', ]]
+  --[[   requires = { ]]
+  --[[     "MunifTanjim/nui.nvim", ]]
+  --[[     "nvim-lua/plenary.nvim", ]]
+  --[[     "sindrets/diffview.nvim", ]]
+  --[[     "stevearc/dressing.nvim", ]]
+  --[[     "nvim-tree/nvim-web-devicons", ]]
+  --[[   }, ]]
+  --[[   run = function() require("gitlab.server").build(true) end, ]]
+  --[[   config = function() ]]
+  --[[     require("gitlab").setup() ]]
+  --[[   end, ]]
+  --[[ } ]]
+
   use({
     "LhKipp/nvim-nu",
     run = ':TSInstall nu'
   })
+
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end
+
 end)

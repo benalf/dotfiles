@@ -50,8 +50,8 @@ navigator.setup({
       func = require('navigator.workspace').remove_workspace_folder,
       desc = 'remove_workspace_folder',
     },
-    { key = '<Space>ff', func = vim.lsp.buf.format, mode = 'n', desc = 'format' },
-    { key = '<Space>ff', func = vim.lsp.buf.range_formatting, mode = 'v', desc = 'range format' },
+    { key = '<Space>lf', func = vim.lsp.buf.format, mode = 'n', desc = 'format' },
+    { key = '<Space>lf', func = vim.lsp.buf.range_formatting, mode = 'v', desc = 'range format' },
     {
       key = '<Space>gm',
       func = require('navigator.formatting').range_format,
@@ -74,6 +74,9 @@ navigator.setup({
     disply_diagnostic_qf = false, -- older versions had a typo
     display_diagnostic_qf = false,
     servers = {"metals"},
+    angularls = {
+      cmd = "",
+    },
     intelephense = {
       settings = {
         intelephense = {
@@ -88,6 +91,13 @@ navigator.setup({
     },
     metals = {
       filetypes = {"scala", "java"},
+      on_attach = function(client)
+        client.resolved_capabilities.document_formatting = true
+        on_attach(client)
+      end
+    },
+    codespell = {
+      filetypes = {"typescript"},
       on_attach = function(client)
         client.resolved_capabilities.document_formatting = true
         on_attach(client)

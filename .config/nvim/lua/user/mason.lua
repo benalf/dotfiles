@@ -3,22 +3,30 @@ if not status_ok then
   return
 end
 
-mason.setup({
-  --[[ config = function () ]]
-  --[[   require("mason-lspconfig").setup_handlers({ ]]
-  --[[     ["rust_analyzer"] = function() ]]
-  --[[       require("lspconfig").pylsp.setup({ ]]
-  --[[         on_attach = function(client, bufnr) ]]
-  --[[           print("hellllloo") ]]
-  --[[           require("navigator.lspclient.mapping").setup({ client = client, bufnr = bufnr }) -- setup navigator keymaps here, ]]
-  --[[           require("navigator.dochighlight").documentHighlight(bufnr) ]]
-  --[[           require("navigator.codeAction").code_action_prompt(bufnr) ]]
-  --[[         end, ]]
-  --[[       }) ]]
-  --[[     end, ]]
-  --[[   }) ]]
-  --[[ end ]]
+local util = require('lspconfig.util')
+mason.setup()
+
+require('mason-lspconfig').setup({
+  handlers = {
+    ['angularls'] = function()
+      require('lspconfig').angularls.setup({
+        single_file_support = false,
+        root_dir = util.root_pattern('angular.json' , 'nx.json'),
+        on_attach = function(client, bufnr)
+          require('navigator.lspclient.mapping').setup({client=client, bufnr=bufnr})
+          require("navigator.dochighlight").documentHighlight(bufnr)
+          require('navigator.codeAction').code_action_prompt(bufnr)
+        end
+      })
+    end,
+    ['tsserver'] = function()
+      require('lspconfig').tsserver.setup({
+        on_attach = function(client, bufnr)
+          require('navigator.lspclient.mapping').setup({client=client, bufnr=bufnr})
+          require("navigator.dochighlight").documentHighlight(bufnr)
+          require('navigator.codeAction').code_action_prompt(bufnr)
+        end
+      })
+    end
+  }
 })
-
-
-require("lspconfig").ocamllsp.setup {}

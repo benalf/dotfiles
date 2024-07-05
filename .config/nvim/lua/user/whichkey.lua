@@ -159,7 +159,7 @@ local mappings = {
       "<cmd>Telescope lsp_workspace_diagnostics<cr>",
       "Workspace Diagnostics",
     },
-    f = { "<cmd>call PhpCsFixerFixFile<cr>", "Format" },
+    --[[ f = { "<cmd>call PhpCsFixerFixFile<cr>", "Format" }, ]]
     i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>Mason<cr>", "Installer Info" },
     j = {
@@ -178,6 +178,10 @@ local mappings = {
       "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
       "Workspace Symbols",
     },
+    P = {
+      "<cmd>%!npx prettier --loglevel=error --stdin-filepath %<cr>",
+      "Prettier"
+    }
   },
   s = {
     name = "Search",

@@ -34,7 +34,9 @@ local options = {
   sidescrolloff = 8,
   guifont = "Iosevka:h10",               -- the font used in graphical neovim applications
   linespace = 3,
-  shell = 'nu',
+  shell = 'bash',
+  spell = true,
+  spelllang = 'en_us',
 }
 
 vim.opt.shortmess:append "c"

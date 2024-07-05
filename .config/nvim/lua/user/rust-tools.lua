@@ -12,16 +12,18 @@ rt.setup({
     end,
     settings = {
         ["rust-analyzer"] = {
-            diagnostics = {
-              disabled = {"unresolved-proc-macro"}
-            },
-            imports = {
-                granularity = {
-                    group = "module",
-                },
-                prefix = "self",
-            },
+            --[[ diagnostics = { ]]
+            --[[   disabled = {"unresolved-proc-macro"} ]]
+            --[[ }, ]]
+            --[[ imports = { ]]
+            --[[     granularity = { ]]
+            --[[         group = "module", ]]
+            --[[     }, ]]
+            --[[     prefix = "self", ]]
+            --[[ }, ]]
             cargo = {
+                runBuildScripts = true,
+                loadOutDirsFromCheck = true,
                 buildScripts = {
                     enable = true,
                 },

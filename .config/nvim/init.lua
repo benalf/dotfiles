@@ -1,4 +1,5 @@
 require "user.options"
+require "user.prettier"
 require "user.plugins"
 require "user.mason"
 require "user.colorscheme"
