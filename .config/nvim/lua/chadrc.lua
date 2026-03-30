@@ -6,13 +6,21 @@
 local M = {}
 
 M.ui = {
+  transparency = true,
   tabufline = {
-    -- enabled = false,
+    enabled = false,
   },
 }
 
+M.disabled = {
+  n = {
+    ["gd"] = "",
+  },
+}
+
+
 M.base46 = {
-  theme = "chadracula",
+  theme = "chadracula-evondev",
 
   -- hl_override = {
   -- 	Comment = { italic = true },

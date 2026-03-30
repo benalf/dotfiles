@@ -9,9 +9,10 @@ def main [filename: string] {
       "nu" => $"nu ($filename)",
       "go" => $"go run ($filename)",
       "php" => $"php ($filename)",
+      "py" => $"python3 ($filename)",
     })
   };
 
-  run-external "nvim" $"($filename)" "-c" ":sp" "-c" $":terminal ^ls ($filename) | entr -r ($exec_cmd)" "-c" ":norm G" "-c" ":wincmd w"
+  run-external "nvim" $"($filename)" "-c" ":sp" "-c" $":terminal ^ls ($filename) /tmp/nvim.alf/latest | entr -r ($exec_cmd)" "-c" ":norm G" "-c" ":wincmd w"
 }
 

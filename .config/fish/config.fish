@@ -1,20 +1,22 @@
+set -g fish_greeting
+
 if status is-interactive
-    # Commands to run in interactive sessions can go here
+    starship init fish | source
 end
 
-set fish_greeting
+# List Directory
+alias l='eza -lh  --icons=auto' # long list
+alias ls='eza -1   --icons=auto' # short list
+alias ll='eza -lha --icons=auto --sort=name --group-directories-first' # long list all
+alias ld='eza -lhD --icons=auto' # long list dirs
+alias lt='eza --icons=auto --tree' # list folder as tree
 
-export PATH="$HOME/.cargo/bin:$PATH"
-export EDITOR=nvim
-export MANPAGER='nvim +Man!'
-export KITTY_ENABLE_WAYLAND=1
+# Handy change dir shortcuts
+abbr .. 'cd ..'
+abbr ... 'cd ../..'
+abbr .3 'cd ../../..'
+abbr .4 'cd ../../../..'
+abbr .5 'cd ../../../../..'
 
-alias vim=nvim
-alias mysql=mariadb
-
-# opam configuration
-source /home/alf/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
-
-# >>> coursier install directory >>>
-set -gx PATH "$PATH:/home/alf/.local/share/coursier/bin"
-# <<< coursier install directory <<<
+# Always mkdir a path (this doesn't inhibit functionality to make a single dir)
+abbr mkdir 'mkdir -p'

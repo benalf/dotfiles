@@ -3,7 +3,7 @@
 # version = "0.85.0"
 
 def create_left_prompt [] {
-    let home =  $nu.home-path
+    let home =  $nu.home-dir
 
     let dir = ([
         ($env.PWD | str substring 0..($home | str length) | str replace $home "~"),
@@ -79,3 +79,5 @@ $env.NU_PLUGIN_DIRS = [
 
 
 source ~/.config/nushell/env.local.nu
+zoxide init nushell | save -f ~/.zoxide.nu
+

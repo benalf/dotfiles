@@ -147,6 +147,13 @@ let fish_completer = {|spans|
 $env.config = {
     show_banner: false # true or false to enable or disable the welcome banner at startup
 
+    display_errors: {
+        exit_code: false
+        # Core dump errors are always printed, and SIGPIPE never triggers an error.
+        # The setting below controls message printing for termination by all other signals.
+        termination_signal: false
+    }
+
     ls: {
         use_ls_colors: true # use the LS_COLORS environment variable to colorize output
         clickable_links: true # enable or disable clickable links. Your terminal has to support links.
@@ -221,8 +228,6 @@ $env.config = {
     }
 
     filesize: {
-        metric: true # true => KB, MB, GB (ISO standard), false => KiB, MiB, GiB (Windows standard)
-        format: "auto" # b, kb, kib, mb, mib, gb, gib, tb, tib, pb, pib, eb, eib, auto
     }
 
     cursor_shape: {
@@ -232,14 +237,12 @@ $env.config = {
     }
 
     color_config: $dark_theme # if you want a more interesting theme, you can replace the empty record with `$dark_theme`, `$light_theme` or another custom record
-    use_grid_icons: true
-    footer_mode: "25" # always, never, number_of_rows, auto
+    footer_mode: 25 # always, never, number_of_rows, auto
     float_precision: 2 # the precision for displaying floats in tables
     buffer_editor: "" # command that will be used to edit the current line buffer with ctrl+o, if unset fallback to $env.EDITOR and $env.VISUAL
     use_ansi_coloring: true
     bracketed_paste: true # enable bracketed paste, currently useless on windows
     edit_mode: vi # emacs, vi
-    shell_integration: false # enables terminal shell integration. Off by default, as some terminals have issues with this.
     render_right_prompt_on_last_line: false # true or false to enable or disable right prompt to be rendered on last line of the prompt.
 
     hooks: {
@@ -768,19 +771,24 @@ $env.config = {
           keycode: char_r
           mode: [emacs, vi_normal, vi_insert]
           event: [
-            {
-              send: ExecuteHostCommand
-              cmd: "commandline (
-                history
-                  | each { |it| $it.command }
-                  | uniq
-                  | reverse
-                  | str join (char -i 0)
-                  | fzf --read0 --layout=reverse --height=40% -q (commandline)
-                  | decode utf-8
-                  | str trim
-              )"
-            }
+              {
+                send: ExecuteHostCommand
+                cmd: "do {
+                  $env.SHELL = "/usr/bin/bash"
+                  commandline edit --insert (
+                    history
+                    | get command
+                    | reverse
+                    | uniq
+                    | str join (char -i 0)
+                    | fzf --scheme=history
+                        --read0
+                        --layout=reverse
+                        --height=40%
+                        --bind 'ctrl-/:change-preview-window(right,70%|right)'
+                  )
+                }"
+              }
           ]
         }
     ]
@@ -788,7 +796,7 @@ $env.config = {
 
 
 alias moo = mprocs --config ~/.config/mprocs/mprocs.yaml
-$env.EDITOR = nvim
+$env.EDITOR = "nvim"
 
 ssh-agent -c 
 | lines
@@ -800,8 +808,12 @@ ssh-agent -c
 source ~/.config/nushell/tools/parse_docker_logs.nu
 use ~/.cache/starship/init.nu
 source ~/.config/nushell/ohp.nu
+source ~/.config/nushell/tools/from_sql.nu
 
-$env.PATH = ($env.PATH | split row (char esep) | append $"($env.HOME)/.cargo/bin")
+$env.PATH = ($env.PATH | split row (char esep)
+  | append $"($env.HOME)/.cargo/bin"
+  | append $"($env.HOME)/.local/bin"
+)
 
 def --env ya [] {
     let tmp = (mktemp -t "yazi-cwd.XXXXX")
@@ -812,3 +824,20 @@ def --env ya [] {
     }
     rm -f $tmp
 }
+
+alias gitlog = git log --all --decorate --oneline --graph
+
+def "from env" []: string -> record {
+  lines 
+    | split column '#' 
+    | get column0 
+    | where {($in | str length) > 0} 
+    | parse "{key}={value}"
+    | update value {str trim -c '"'}
+    | transpose -r -d
+}
+
+source ~/.zoxide.nu
+
+source $"($nu.home-dir)/.cargo/env.nu"
+use std/dirs;
