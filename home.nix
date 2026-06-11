@@ -13,6 +13,8 @@
     eza
     zoxide
 
+    nushell
+    kitty
     yazi
     opencode
     htop
@@ -22,7 +24,6 @@
     unzip
     tree
     jq
-
     delta
     tokei
     bottom
