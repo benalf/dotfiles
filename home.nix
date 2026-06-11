@@ -42,24 +42,29 @@
 
   programs.git = {
     enable = true;
-    userName = "Alfred Bendrup";
-    userEmail = "me@alfredbendrup.me";
 
-    delta = {
-      enable = true;
-      options = {
-        theme = "Catppuccin Mocha";
-        line-numbers = true;
-        side-by-side = true;
+    settings = {
+      user = {
+        name = "Alfred Bendrup";
+        email = "me@alfredbendrup.me";
+
+      };
+      alias = {
+        st = "status";
+        co = "checkout";
+        br = "branch";
+        cm = "commit -m";
+        cam = "commit -am";
       };
     };
+  };
 
-    aliases = {
-      st = "status";
-      co = "checkout";
-      br = "branch";
-      cm = "commit -m";
-      cam = "commit -am";
+  programs.delta = {
+    enable = true;
+    options = {
+      theme = "Catppuccin Mocha";
+      line-numbers = true;
+      side-by-side = true;
     };
   };
 
