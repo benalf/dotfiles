@@ -1,0 +1,56 @@
+local map = vim.keymap.set
+
+map("n", "<Esc>", "<cmd>nohlsearch<CR>")
+
+map("n", "<C-q>", "<Esc>:q!<cr>")
+map("i", "<C-q>", "<Esc>:q!<cr>")
+map("n", "<C-s>", "<Esc>:w!<cr>")
+map("i", "<C-s>", "<Esc>:w!<cr>")
+map("n", "<leader>q", "<cmd>q!<CR>")
+map("n", "<leader>e", "<cmd>Neotree toggle reveal<cr>")
+map("n", "<A-h>", function()
+	require("smart-splits").resize_left(5)
+end)
+map("n", "<A-j>", function()
+	require("smart-splits").resize_down(5)
+end)
+map("n", "<A-k>", function()
+	require("smart-splits").resize_up(5)
+end)
+map("n", "<A-l>", function()
+	require("smart-splits").resize_right(5)
+end)
+map("n", "<C-h>", "<cmd><C-U>TmuxNavigateLeft<cr>")
+map("n", "<C-j>", "<cmd><C-U>TmuxNavigateDown<cr>")
+map("n", "<C-k>", "<cmd><C-U>TmuxNavigateRight<cr>")
+map("n", "<C-l>", "<cmd><C-U>TmuxNavigateUp<cr>")
+
+map("n", "gr", "<cmd>Telescope lsp_references<cr>")
+map("n", "gi", "<cmd>Telescope lsp_implementations<cr>")
+map("n", "gd", function()
+	require("lsp_telescope").definitions()
+end)
+map("n", "gD", "<cmd>Telescope lsp_type_definitions<cr>")
+map("n", "ff", "<cmd>Telescope find_files<cr>")
+map("n", "fw", "<cmd>Telescope live_grep<cr>")
+map("n", "fh", "<cmd>Telescope help_tags<cr>")
+map("n", "<M-CR>", "<cmd>:lua vim.lsp.buf.code_action()<cr>")
+
+map("v", "<C-r>", function()
+	vim.cmd('noautocmd silent! normal! "hy')
+	local selection = vim.fn.getreg("h")
+	local escaped = vim.fn.escape(selection, [[\/]])
+	local cmd = ":%s/\\V" .. escaped .. "//gI"
+	local left = vim.api.nvim_replace_termcodes("<Left><Left><Left>", true, false, true)
+	vim.api.nvim_feedkeys(cmd .. left, "n", false)
+end)
+
+map("n", "<leader>ds", "<cmd>Telescope diagnostics<cr>")
+
+map("n", "[d", "<cmd>:lua vim.diagnostic.goto_prev()<cr>")
+map("n", "]d", "<cmd>:lua vim.diagnostic.goto_next()<cr>")
+
+map("n", "<leader>fm", "<cmd>Format<cr>")
+
+map("v", ">", ">gv")
+map("v", "<", "<gv")

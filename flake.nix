@@ -30,6 +30,8 @@
               };
 
               home.file.".config/omarchy".enable = false;
+              home.file.".config/nvim".enable = false;
+              home.file.".config/tmux".enable = false;
               home.file.".config/hypr".enable = false;
               home.file.".config/alacritty".enable = false;
               home.file.".config/btop/themes".enable = false;
