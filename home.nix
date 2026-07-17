@@ -13,6 +13,8 @@
     bat
     eza
     zoxide
+    cmake
+    gh
 
     lmstudio
     kitty
